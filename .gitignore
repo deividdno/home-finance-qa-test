@@ -1,0 +1,34 @@
+# Ignorar tudo
+*
+
+# Liberar pastas
+!*/
+
+# Liberar arquivos principais
+!.gitignore
+!README.md
+
+# Liberar estrutura principal
+!ExameDesenvolvedorDeTestes/
+!ExameDesenvolvedorDeTestes/**
+
+# Bloquear aplicação original
+ExameDesenvolvedorDeTestes/api/MinhasFinancas.API/
+ExameDesenvolvedorDeTestes/api/MinhasFinancas.Application/
+ExameDesenvolvedorDeTestes/api/MinhasFinancas.Domain/
+ExameDesenvolvedorDeTestes/api/MinhasFinancas.Infrastructure/
+ExameDesenvolvedorDeTestes/web/
+
+# Liberar SOMENTE testes
+!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/
+!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/**
+
+# Liberar docs
+!ExameDesenvolvedorDeTestes/docs/
+!ExameDesenvolvedorDeTestes/docs/**
+
+# Binários
+**/bin/
+**/obj/
+node_modules/
+dist/
