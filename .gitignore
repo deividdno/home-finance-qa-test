@@ -1,34 +1,50 @@
-# Ignorar tudo
+# Ignorar tudo por padrão
 *
 
-# Liberar pastas
+# Permitir navegar em pastas
 !*/
 
-# Liberar arquivos principais
+# Arquivos principais
 !.gitignore
 !README.md
 
-# Liberar estrutura principal
+# Estrutura raiz do projeto
 !ExameDesenvolvedorDeTestes/
-!ExameDesenvolvedorDeTestes/**
 
-# Bloquear aplicação original
-ExameDesenvolvedorDeTestes/api/MinhasFinancas.API/
-ExameDesenvolvedorDeTestes/api/MinhasFinancas.Application/
-ExameDesenvolvedorDeTestes/api/MinhasFinancas.Domain/
-ExameDesenvolvedorDeTestes/api/MinhasFinancas.Infrastructure/
-ExameDesenvolvedorDeTestes/web/
-
-# Liberar SOMENTE testes
+# =========================
+# BACKEND - somente testes
+# =========================
+!ExameDesenvolvedorDeTestes/api/
 !ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/
 !ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/**
 
-# Liberar docs
+# =========================
+# FRONTEND - somente testes
+# =========================
+!ExameDesenvolvedorDeTestes/web/
+!ExameDesenvolvedorDeTestes/web/src/
+!ExameDesenvolvedorDeTestes/web/src/test/
+!ExameDesenvolvedorDeTestes/web/src/test/**
+
+# =========================
+# DOCUMENTAÇÃO / BUGS
+# =========================
 !ExameDesenvolvedorDeTestes/docs/
 !ExameDesenvolvedorDeTestes/docs/**
 
-# Binários
+!ExameDesenvolvedorDeTestes/Bugs/
+!ExameDesenvolvedorDeTestes/Bugs/**
+
+# README interno
+!ExameDesenvolvedorDeTestes/README.md
+
+# =========================
+# Arquivos temporários
+# =========================
 **/bin/
 **/obj/
-node_modules/
-dist/
+**/node_modules/
+**/dist/
+**/.vite/
+**/coverage/
+*.log
