@@ -1,64 +1,43 @@
-# Ignorar tudo por padrão
+# Ignorar tudo
 *
-
-# Permitir navegar em pastas
 !*/
 
-# Arquivos principais
+# Arquivos raiz
 !.gitignore
 !README.md
 
-# Estrutura raiz do projeto
-!ExameDesenvolvedorDeTestes/
-
-# =========================
-# BACKEND - somente testes
-# =========================
-!ExameDesenvolvedorDeTestes/api/
-!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/
-!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/**
-
-# =========================
-# FRONTEND - somente testes
-# =========================
-!ExameDesenvolvedorDeTestes/web/
-!ExameDesenvolvedorDeTestes/web/src/
-!ExameDesenvolvedorDeTestes/web/src/test/
-!ExameDesenvolvedorDeTestes/web/src/test/**
-
-# =========================
-# TESTES E2E
-# =========================
+# Pasta E2E
 !Tests_e2e/
 !Tests_e2e/**
 
-# =========================
-# DOCUMENTAÇÃO / BUGS
-# =========================
-!ExameDesenvolvedorDeTestes/docs/
-!ExameDesenvolvedorDeTestes/docs/**
+# Pasta principal
+!ExameDesenvolvedorDeTestes/
+/ExameDesenvolvedorDeTestes/*
 
+# README interno principal
+!ExameDesenvolvedorDeTestes/README.md
+
+# Bugs
 !ExameDesenvolvedorDeTestes/Bugs/
 !ExameDesenvolvedorDeTestes/Bugs/**
 
-# README interno
-!ExameDesenvolvedorDeTestes/README.md
+# Backend Tests
+!ExameDesenvolvedorDeTestes/api/
+/ExameDesenvolvedorDeTestes/api/*
+!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/
+!ExameDesenvolvedorDeTestes/api/MinhasFinancas.Tests/**
 
-# =========================
-# Arquivos temporários
-# =========================
+# Frontend tests somente
+!ExameDesenvolvedorDeTestes/web/
+/ExameDesenvolvedorDeTestes/web/*
+!ExameDesenvolvedorDeTestes/web/src/
+/ExameDesenvolvedorDeTestes/web/src/*
+!ExameDesenvolvedorDeTestes/web/src/test/
+!ExameDesenvolvedorDeTestes/web/src/test/**
+
+# Não liberar web/README.md (fica ignorado)
+
+# Temporários
 **/bin/
 **/obj/
 **/node_modules/
-**/dist/
-**/.vite/
-**/coverage/
-*.log
-
-# Playwright
-node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
