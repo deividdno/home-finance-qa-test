@@ -27,6 +27,12 @@
 !ExameDesenvolvedorDeTestes/web/src/test/**
 
 # =========================
+# TESTES E2E
+# =========================
+!Tests_e2e/
+!Tests_e2e/**
+
+# =========================
 # DOCUMENTAÇÃO / BUGS
 # =========================
 !ExameDesenvolvedorDeTestes/docs/
@@ -48,3 +54,11 @@
 **/.vite/
 **/coverage/
 *.log
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
