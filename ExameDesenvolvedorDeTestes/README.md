@@ -1,85 +1,77 @@
-# Minhas Finanças
+### Teste Técnico: Analista de Qualidade de Software
 
-Sistema de controle de gastos residenciais com Clean Architecture.
+Nome: Deivid Nunes Oliveira
 
-## Arquitetura
+E-mail: deivid.dno18@gmail.com
 
-- **Backend**: .NET 9 Web API (Clean Architecture)
-- **Application**: `MinhasFinancas.Application` (serviços, DTOs, validações)
-- **Domain**: `MinhasFinancas.Domain` (entidades, interfaces, regras de negócio)
-- **Infrastructure**: `MinhasFinancas.Infrastructure` (EF Core, repositórios, seed)
-- **Frontend**: React com TypeScript (pasta `web/`)
-- **Banco de Dados**: SQLite por padrão (configurável)
+### Resumo do Projeto
 
-## Quickstart — Desenvolvimento local
+Este repositório contém a solução de testes automatizados para o sistema de controle de gastos residenciais. A estratégia de testes foi estruturada para validar as regras de negócio descritas no escopo, com foco em integridade de dados, fluxos de exceção e qualidade da interface.
 
-Pré-requisitos:
-- Docker & Docker Compose
-- .NET 9 SDK (se quiser rodar API local sem containers)
-- `bun` (para rodar o frontend localmente sem Docker)
+### Pirâmide de Testes e Estratégia
 
-Com Docker (recomendado):
+A estrutura de testes foi dividida em três níveis para garantir a eficiência da validação:
 
-```bash
-docker-compose up --build
-```
+1. Testes Unitários (xUnit): Implementados no back-end para validar as entidades e as regras de cálculo lógico de saldo.
 
-Isso expõe por padrão:
-- API: http://localhost:5000 (Swagger UI em `/swagger`)
-- Frontend: http://localhost:5173
+2. Testes de Integração (xUnit/Vitest): Focados na persistência de dados no banco de dados e na integração de componentes React no front-end.
 
-Rodando apenas a API localmente (sem Docker):
+3. Testes End-to-End (Playwright): Cobertura das jornadas principais do usuário, incluindo o fluxo de cadastro de transações, gerenciamento de categorias e validação visual do dashboard.
 
-```bash
-cd api/MinhasFinancas.API
-dotnet build
-dotnet run --project MinhasFinancas.API.csproj
-```
+Justificativa: A priorização do Playwright no nível E2E foi definida para garantir que as restrições de idade e tipos de transação sejam validadas da perspectiva do usuário final, onde as falhas de integração são mais críticas.
 
-Rodando o frontend localmente (sem Docker):
+### Tecnologias Utilizadas
 
-```bash
-cd web
-bun install
-bunx vite
-```
+- Back-end: C# e .NET com framework xUnit.
 
-Gerar migrations (quando alterar modelos):
+- Front-end: React, TypeScript e Vitest.
 
-```powershell
-dotnet ef migrations add <Name> --project MinhasFinancas.Infrastructure --startup-project MinhasFinancas.API
-```
+- Automação E2E: Playwright.
 
-## Documentação da API
+### Procedimentos para Execução dos Testes
 
-- Swagger/OpenAPI já habilitado. Acesse `http://localhost:5000/swagger` quando a API estiver rodando.
-- Endpoints principais estão em `api/MinhasFinancas.API/Controllers`.
+### Pré-requisitos
 
-## Qualidade de Código / Análise Estática
+- Aplicação em execução no ambiente Docker (localhost:5173).
 
-- Regras de análise .NET estão ativadas via `Directory.Build.props`.
-- Para executar análise localmente use `dotnet build` e verifique warnings/errores.
-- Arquivo `sonar-project.properties` está no repositório para integração com SonarQube/SonarCloud.
+- Node.js e .NET SDK instalados no ambiente local.
 
-Exemplo (SonarScanner):
+### Execução de Testes E2E (Playwright)
 
-```bash
-# Assumindo SonarScanner instalado e configurado
-sonar-scanner \
-	-Dsonar.projectKey=minhas-financas \
-	-Dsonar.sources=. \
-	-Dsonar.host.url=<SONAR_URL> \
-	-Dsonar.login=<TOKEN>
-```
+# Instalação de dependências
 
-## Notas úteis
+npm install
 
-- Arquivos importantes:
-	- API entry: [api/MinhasFinancas.API/Program.cs](api/MinhasFinancas.API/Program.cs#L1)
-	- Application services: [api/MinhasFinancas.Application/Services](api/MinhasFinancas.Application/Services)
-	- Domain entities: [api/MinhasFinancas.Domain/Entities](api/MinhasFinancas.Domain/Entities)
-	- Infrastructure: [api/MinhasFinancas.Infrastructure](api/MinhasFinancas.Infrastructure)
-- Para rodar os testes (quando adicionados), veja projetos `*.Tests` (não incluídos ainda).
+# Execução em modo headless
 
----
-Arquivo de configurações de análise: `Directory.Build.props` e `sonar-project.properties`.
+npx playwright test
+
+# Execução com interface gráfica para depuração
+
+npx playwright test --ui
+
+### Execução de Testes Unitários e Integração (.NET)
+
+dotnet test
+
+### Bugs Identificados e Documentados
+
+As falhas encontradas durante a execução dos testes foram catalogadas na pasta /docs/bugs. Cada relatório detalha o impacto na regra de negócio.
+
+1. ID = 001 | Título = Permissão de Receita para Menor de Idade | Regra Violada = Regra de Negócio: Idade vs Tipo de Transação | Severidade = Crítica
+
+2. ID = 002 | Título = Seleção de Categoria inconsistente com a Finalidade | Regra Violada = Regra de Negócio: Vínculo Categoria/Tipo | Severidade = Alta
+
+3. ID = 003 | Título = Falha na integridade referencial e exclusão em cascata | Regra Violada = Integridade de Dados (DB) | Severidade = Crítica
+
+4. ID = 004 | Título = Falha na persistência de transação via Modal | Regra Violada = Funcionalidade Principal (CRUD) | Severidade = Crítica
+
+5. ID = 005 | Título = Overflow e falta de responsividade no gráfico | Regra Violada = UI/UX / Dashboard | Severidade = Média
+
+### Justificativa das Escolhas de Testes
+
+- Foco em Regras de Negócio: Os scripts foram desenvolvidos para testar prioritariamente as restrições de idade e categorias, garantindo que o sistema impeça ações indevidas.
+
+- Mapeamento de Falhas: O código de teste foi estruturado para capturar e evidenciar erros de sistema, como o travamento no modal de salvamento.
+
+- Manutenibilidade: Utilização de seletores robustos para evitar a fragilidade dos testes diante de alterações menores no CSS ou estrutura HTML.
